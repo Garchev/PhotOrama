@@ -1,0 +1,32 @@
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+
+
+.container-sm {
+    max-width: 466px;
+    padding-top: 15px;
+    border-radius: 15px;
+    position: relative;
+    top: 160px;
+    background-color: rgb(77, 75, 75);
+}
+
+.btn-primary {
+color: rgb(255, 255, 255);
+position: relative;
+left: 11rem;
+margin-bottom: 15px;
+}
+
+.form-label {
+    color: rgb(255, 255, 255);
+ 
+
+}
+
+.form-control:focus {
+    outline: none;
+    border-top: 0px;
+    border-left: 0px;
+    border-style: none;
+}
