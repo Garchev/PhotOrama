@@ -1,5 +1,16 @@
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
- 
+
+.header {
+    padding-bottom: 48px;
+}
 img .d-inline-block, .align-top {
     margin-right: 4px;
+
+}
+.navbar {
+    position: fixed;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1;
 }

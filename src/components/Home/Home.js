@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Cookie from 'js-cookie';
 
 class Home extends Component {
-    constructor() {
-        super();
-    }
+    
 
     render() {
         let cookie = Cookie.get('auth') || null;

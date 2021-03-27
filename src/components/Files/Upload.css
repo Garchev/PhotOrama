@@ -1,4 +1,31 @@
 #uploadContainer {
     height: 300px;
+    max-width: 466px;
+    padding-top: 15px;
+    border-radius: 15px;
+    position: relative;
+    top: 160px;
+    background-color: rgb(77, 75, 75);
+}
+.progress {
+    margin-bottom: 14px;
+
+}
+#custom-file {
+    border-color: antiquewhite;
+    border-style: solid;
+    border-radius: 6px;
+    margin-bottom: 19px;
+}
+.form-file-label {
+    color: aliceblue;
+    font-weight: bold;
+}
+#imageName {
+    margin-bottom: 19px;
 }
 
+#imageDescr {
+    margin-bottom: 19px;
+
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Auth.css';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 import * as user from '../../services/user';
 
 class Login extends Component {
@@ -30,7 +30,9 @@ class Login extends Component {
 
     render = () => {
         return (
-            <Container fluid="sm" >
+            <Container fluid="sm" id="authContainer">
+                <Alert id="error" variant="danger">Error</Alert>
+
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formGroupEmail">
                         <Form.Label>Enter Email address</Form.Label>
