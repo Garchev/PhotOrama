@@ -21,10 +21,19 @@ class Login extends Component {
     }
 
     handleSubmit = (event) => {
-        
+
         event.preventDefault();
         user.login(this.state.email, this.state.password).then(user => {
-            this.props.history.push('/') 
+            this.props.history.push('/')
+        }).catch((e) => {
+            let errorBar = document.getElementById('error');
+            errorBar.innerText = e;
+            errorBar.style.display = "block";
+
+            setTimeout(() => {
+                errorBar.style.display = "none";
+
+            }, 2000);
         })
     }
 
@@ -36,11 +45,21 @@ class Login extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formGroupEmail">
                         <Form.Label>Enter Email address</Form.Label>
-                        <Form.Control value={this.email} onChange={this.changeEmail} name="email" type="email" placeholder="Enter email address" />
+                        <Form.Control
+                            value={this.email}
+                            onChange={this.changeEmail}
+                            name="email"
+                            type="email"
+                            placeholder="Enter email address" />
                     </Form.Group>
                     <Form.Group controlId="formGroupPassword">
                         <Form.Label>Enter Password</Form.Label>
-                        <Form.Control value={this.password} onChange={this.changePassword} name="password" type="password" placeholder="Enter Password" />
+                        <Form.Control
+                            value={this.password}
+                            onChange={this.changePassword}
+                            name="password"
+                            type="password"
+                            placeholder="Enter Password" />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Login

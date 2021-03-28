@@ -17,10 +17,6 @@ export function getUserData() {
     let cookie = Cookies.get('auth')
 
     return cookie ? JSON.parse(cookie) : {};
-
-
-
-
 }
 
 export async function getUserFromDB(email) {
@@ -49,7 +45,7 @@ export async function login(email, password) {
     return response;
 }
 
-export async function register(email, password, repassword, username) {
+export async function register(email, password, username) {
 
     let response = await request(endpoints.register + apiKey, "POST", {
         email,

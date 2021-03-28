@@ -2,18 +2,13 @@ import { db, storage } from './firebase';
 import firebase from 'firebase';
 import { getUserFromDB } from './user';
 
-export async function uploadImage(image, setProgress, cookie, imageName, imageDescr) {
+export async function uploadImage(image, cookie, imageName, imageDescr, imageCategory) {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
         'state-changed',
-        snapshot => {
-            const progress = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            setProgress(progress)
-
-        },
+        snapshot => {},
         error => {
-            console.log(error)
+            throw new Error(error);
         },
         () => {
             storage
@@ -22,9 +17,10 @@ export async function uploadImage(image, setProgress, cookie, imageName, imageDe
                 .getDownloadURL()
                 .then(url => {
                     db.collection('images').add({
-                        title: imageName,
+                        imageName: imageName,
                         description: imageDescr,
                         author: cookie.username,
+                        category: imageCategory,
                         url: url,
                         likes: 0
                     }).then(res => {
@@ -38,6 +34,10 @@ export async function uploadImage(image, setProgress, cookie, imageName, imageDe
                 })
         });
 
+}
+
+export async function getOne(id) {
+    return await db.collection("images").doc(id).get().then((res) => res)
 }
 
 export async function getAllImages(email) {
@@ -55,8 +55,9 @@ export async function getAllImages(email) {
                         id: doc.id,
                         author: doc.data().author,
                         imageUrl: doc.data().url,
-                        title: doc.data().title,
+                        imageName: doc.data().imageName,
                         description: doc.data().description,
+                        category: doc.data().category,
                         likes: doc.data().likes
                     })
             });
@@ -64,6 +65,33 @@ export async function getAllImages(email) {
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-    
+
     return images;
+}
+
+export async function getTop3Images() {
+    let images = [];
+    await db.collection('images').get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                images.push(
+                    {
+                        id: doc.id,
+                        author: doc.data().author,
+                        imageUrl: doc.data().url,
+                        imageName: doc.data().imageName,
+                        description: doc.data().description,
+                        category: doc.data().category,
+                        likes: doc.data().likes
+                    })
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+    let top = images.sort((a, b) => {
+        return (Number(b.likes) - Number(a.likes))
+    });
+    top = top.slice(0, 3)
+    return top;
 }

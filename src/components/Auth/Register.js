@@ -45,10 +45,9 @@ class Register extends Component {
         try {
             userServices.checkFieldsInForm(this.state.email, this.state.password, this.state.rePassword, this.state.username);
            
-            userServices.register(this.state.email, this.state.password, this.state.rePassword, this.state.username)
+            userServices.register(this.state.email, this.state.password, this.state.username)
                 .then(user => {
                     this.props.history.push('/');
-                    userServices.register(user.localId, user.email, this.state.username);
                 }).catch((e) => {
                 this.handleError(e);
                 })

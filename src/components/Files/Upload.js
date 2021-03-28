@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import Cookie from 'js-cookie';
-import { Container, Form, Button, ProgressBar } from 'react-bootstrap'
-import { uploadImage } from '../../services/images'
+import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { uploadImage } from '../../services/images';
 import './Upload.css';
 
 
-function Upload(props) {
-    const [progress, setProgress] = useState(0);
+function Upload({ history }) {
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState('');
     const [imageDescr, setImageDescr] = useState('');
+    const [imageCategory, setImageCategory] = useState('');
+    const cookie = JSON.parse(Cookie.get('auth'));
 
-    const cookie = JSON.parse(Cookie.get('auth'))
-
-
+    const handleError = (e) => {
+        let errorBar = document.getElementById('error');
+                errorBar.innerText = e;
+                errorBar.style.display = "block";
+    
+                setTimeout(() => {
+                    errorBar.style.display = "none";
+                }, 2000);
+    }
+    
     const handleChange = (e) => {
         if (e.target.files[0]) {
             setImage(e.target.files[0])
@@ -22,14 +30,17 @@ function Upload(props) {
 
     const handleUpload = (e) => {
         e.preventDefault();
-        uploadImage(image, progress, setProgress, cookie, imageName, imageDescr);
+        uploadImage(image, cookie, imageName, imageDescr, imageCategory)
+            .then(() => history.push('/'))
+            .catch((e) => handleError(e))
     }
+
 
     return (
         <Container id="uploadContainer" fluid="sm">
             <Form>
                 <Form.Group>
-                    <ProgressBar now={progress} label={`${progress}%`} />
+                    <Alert id="error" variant="danger">Error</Alert>
                     <Form.File id="custom-file" label="Choose image to upload" onChange={handleChange} />
                     <Form.Control value={imageName}
                         onChange={(e) => setImageName(e.target.value)}
@@ -46,6 +57,11 @@ function Upload(props) {
                         placeholder="Image Description"
                         label="Image Description"
                     />
+                    <Form.Control as="select" onChange={(e) => setImageCategory(e.target.value)}>
+                        <option value="Nature">Nature</option>
+                        <option value="People">People</option>
+                        <option value="Vacation">Vacation</option>
+                    </Form.Control>
                 </Form.Group>
 
                 <Button variant="primary" type="submit" onClick={handleUpload}> Upload </Button>
