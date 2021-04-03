@@ -1,14 +1,16 @@
 import './Auth.css';
 import Cookie from 'js-cookie';
+import { logout } from '../../services/user';
 
+function Logout({ history }) {
 
-function Logout({history}) {
-   
-    Cookie.remove('auth');
-    history.push('/')
-    return null
-
+    logout().then(() => {
+        
+        history.push('/users/login')
+        
+    })
+    
+    return null;
 }
-
 
 export default Logout;

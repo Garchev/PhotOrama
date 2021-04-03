@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Auth.css';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import * as user from '../../services/user';
+import * as userServices from '../../services/user';
 
 class Login extends Component {
     constructor(props) {
@@ -23,7 +23,8 @@ class Login extends Component {
     handleSubmit = (event) => {
 
         event.preventDefault();
-        user.login(this.state.email, this.state.password).then(user => {
+        userServices.login(this.state.email, this.state.password).then(user => {
+            
             this.props.history.push('/')
         }).catch((e) => {
             let errorBar = document.getElementById('error');

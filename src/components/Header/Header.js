@@ -1,8 +1,17 @@
+import { useEffect, useState } from 'react';
 import { getUserData } from '../../services/user';
 import './Header.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 function Header() {
-    let user = getUserData();
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        let user = getUserData();
+        console.log(user)
+        if (!user.username) {
+            setUser(user)
+        }
+    }, [user])
 
     return (
         <div className="header">
