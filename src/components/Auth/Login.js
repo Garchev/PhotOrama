@@ -1,32 +1,40 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import './Auth.css';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import * as userServices from '../../services/user';
-
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loggedIn: false,
+            user: null,
             email: '',
             password: ''
         }
     }
 
-    changeEmail = (event) => {
-        this.setState({ email: event.target.value })
-    }
+    changeProp = (event) => {
 
-    changePassword = (event) => {
-        this.setState({ password: event.target.value })
+        this.setState({ [event.target.name]: event.target.value })
     }
-
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
 
         event.preventDefault();
-        userServices.login(this.state.email, this.state.password).then(user => {
-            
-            this.props.history.push('/')
-        }).catch((e) => {
+        const {
+            email,
+            password
+        } = this.state;
+
+        try {
+            userServices.login(email, password).then((userCredential) => {
+                this.setState({user: userCredential.user, loggedIn: true})
+                userServices.getUserFromDB(email)
+                this.props.history.push('/')
+            })
+                .catch(e => {
+                    throw new Error(e);
+                })
+        } catch (e) {
             let errorBar = document.getElementById('error');
             errorBar.innerText = e;
             errorBar.style.display = "block";
@@ -35,10 +43,10 @@ class Login extends Component {
                 errorBar.style.display = "none";
 
             }, 2000);
-        })
+        }
     }
 
-    render = () => {
+    render() {
         return (
             <Container fluid="sm" id="authContainer">
                 <Alert id="error" variant="danger">Error</Alert>
@@ -48,7 +56,7 @@ class Login extends Component {
                         <Form.Label>Enter Email address</Form.Label>
                         <Form.Control
                             value={this.email}
-                            onChange={this.changeEmail}
+                            onChange={this.changeProp}
                             name="email"
                             type="email"
                             placeholder="Enter email address" />
@@ -57,7 +65,7 @@ class Login extends Component {
                         <Form.Label>Enter Password</Form.Label>
                         <Form.Control
                             value={this.password}
-                            onChange={this.changePassword}
+                            onChange={this.changeProp}
                             name="password"
                             type="password"
                             placeholder="Enter Password" />

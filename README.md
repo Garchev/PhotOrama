@@ -5,7 +5,7 @@ The app is using firebase as a Back-end service and storage provider.
 
 ## Available Scripts
 
-In the project directory, you can have to:
+In the project directory, you have to:
 
 ### `npm i`
 To install needed dependencies.

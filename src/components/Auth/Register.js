@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Auth.css';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import './Auth.css';
 import * as userServices from '../../services/user';
 class Register extends Component {
     constructor(props) {
@@ -14,7 +14,6 @@ class Register extends Component {
     }
     
     changeProp = (event) => {
-        
         this.setState({ [event.target.name]: event.target.value })
     }
 
@@ -31,15 +30,15 @@ class Register extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         try {
-            userServices.checkFieldsInForm(this.state.email, this.state.password, this.state.rePassword, this.state.username);
+            userServices.checkFieldsInForm(this.state.username, this.state.password, this.state.rePassword, this.state.email);
 
             userServices.register(this.state.email, this.state.password, this.state.username)
-                .then((user) => {
-                    console.log(user)
-                    this.props.history.push('/');
+                .then(user => {
+                    userServices.setUserInDB(user.user, this.state.username);
+                    userServices.login(this.state.email, this.state.password);
+                    this.props.history.push('/')
                 }).catch((e) => {
-                    console.log('heres');
-                this.handleError(e);
+                    this.handleError(e);
                 })
         } catch (e) {
             this.handleError(e);

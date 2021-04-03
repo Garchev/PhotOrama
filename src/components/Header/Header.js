@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { getUserData } from '../../services/user';
 import './Header.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 function Header() {
-    const [user, setUser] = useState({});
+    let user = getUserData();
+    // const [user, setUser] = useState({});
 
-    useEffect(() => {
-        let user = getUserData();
-        console.log(user)
-        if (!user.username) {
-            setUser(user)
-        }
-    }, [user])
-
+    // useEffect(() => {
+    //     
+    //     if (!user) {
+    //         setUser(user)
+    //     }
+    // }, [user])
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -29,7 +28,7 @@ function Header() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href={`/images/${user.id}`}>My Photos</Nav.Link>
+                        {user != null ? <Nav.Link href={`/images/${user.id}`}>My Photos</Nav.Link> : null}
                         <NavDropdown title="My Photos" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Nature</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">People</NavDropdown.Item>
@@ -48,10 +47,24 @@ function Header() {
                             </svg>}
                             drop="left" id="collasible-nav-dropdown">
 
-                            {user.username ? null : <NavDropdown.Item href="/users/register">Register</NavDropdown.Item>}
-                            {user.username ? <NavDropdown.Item href="/users/logout">Logout</NavDropdown.Item> : <NavDropdown.Item href="/users/login">Login</NavDropdown.Item>}
+                            {user != null ?
+                                null
+                                :
+                                <NavDropdown.Item href="/users/register">Register</NavDropdown.Item>
+                            }
+
+                            {user != null
+                                ?
+                                <NavDropdown.Item onClick={() => setUser(null)} href="/users/logout">Logout</NavDropdown.Item>
+                                :
+                                <NavDropdown.Item href="/users/login">Login</NavDropdown.Item>
+                            }
                             <NavDropdown.Divider />
-                            {user.username ? <NavDropdown.Item href={`/users/details/${user.id}`}>My Profile</NavDropdown.Item> : null}
+                            {user != null ?
+                                <NavDropdown.Item href={`/users/details/${user.id}`}>My Profile</NavDropdown.Item>
+                                :
+                                null
+                            }
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
