@@ -6,13 +6,14 @@ class Register extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            
             email: '',
             password: '',
             rePassword: '',
             username: ''
         }
     }
-    
+
     changeProp = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }

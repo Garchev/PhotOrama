@@ -2,7 +2,9 @@ import { db, storage } from './firebase';
 import firebase from 'firebase';
 import { getUserFromDB } from './user';
 
-export async function uploadImage(image, cookie, imageName, imageDescr, imageCategory) {
+export async function uploadImage(image, user, imageName, imageDescr, imageCategory) {
+    console.log(user)
+    
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
         'state-changed',
@@ -19,12 +21,12 @@ export async function uploadImage(image, cookie, imageName, imageDescr, imageCat
                     db.collection('images').add({
                         imageName: imageName,
                         description: imageDescr,
-                        author: cookie.username,
+                        author: user.username,
                         category: imageCategory,
                         url: url,
                         likes: 0
                     }).then(res => {
-                        db.collection("users").where("username", "==", cookie.username).get().then((e) => {
+                        db.collection("users").where("username", "==", user.username).get().then((e) => {
                             let ref = db.collection("users").doc(e.docs['0'].id);
                             ref.update({
                                 images: firebase.firestore.FieldValue.arrayUnion(res.d_.id)

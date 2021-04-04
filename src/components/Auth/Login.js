@@ -1,39 +1,32 @@
-import { Component } from 'react';
+import { useContext } from 'react';
 import './Auth.css';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import * as userServices from '../../services/user';
-class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            loggedIn: false,
-            user: null,
-            email: '',
-            password: ''
-        }
-    }
+import { UserContext } from '../../UserContext';
 
-    changeProp = (event) => {
-
-        this.setState({ [event.target.name]: event.target.value })
-    }
-    handleSubmit = async (event) => {
+function Login ({history}) {
+    const {user, setUser} = useContext(UserContext);
+  
+    const handleSubmit = async (event) => {
 
         event.preventDefault();
-        const {
-            email,
-            password
-        } = this.state;
-
+        let email = event.target.email.value;
+        let password = event.target.password.value;
+        
         try {
-            userServices.login(email, password).then((userCredential) => {
-                this.setState({user: userCredential.user, loggedIn: true})
-                userServices.getUserFromDB(email)
-                this.props.history.push('/')
-            })
-                .catch(e => {
-                    throw new Error(e);
+            userServices.login(email, password).then(async (userCredential) => {
+                let username = await userServices.getUserFromDB(userCredential.user.email);
+                let { email, uid } = userCredential.user;
+                setUser({loggedIn: true,
+                    user: {
+                        username: username,
+                        email: email,
+                        id: uid
+                    }
                 })
+                history.push('/')
+                
+            })
         } catch (e) {
             let errorBar = document.getElementById('error');
             errorBar.innerText = e;
@@ -46,17 +39,15 @@ class Login extends Component {
         }
     }
 
-    render() {
-        return (
+
+    return (
             <Container fluid="sm" id="authContainer">
                 <Alert id="error" variant="danger">Error</Alert>
 
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formGroupEmail">
                         <Form.Label>Enter Email address</Form.Label>
                         <Form.Control
-                            value={this.email}
-                            onChange={this.changeProp}
                             name="email"
                             type="email"
                             placeholder="Enter email address" />
@@ -64,8 +55,6 @@ class Login extends Component {
                     <Form.Group controlId="formGroupPassword">
                         <Form.Label>Enter Password</Form.Label>
                         <Form.Control
-                            value={this.password}
-                            onChange={this.changeProp}
                             name="password"
                             type="password"
                             placeholder="Enter Password" />
@@ -75,8 +64,8 @@ class Login extends Component {
                 </Button>
                 </Form>
             </Container>
-        )
-    }
+    )
 }
+
 
 export default Login;

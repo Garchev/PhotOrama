@@ -1,21 +1,16 @@
-// import { useEffect, useState } from 'react';
-import { getUserData } from '../../services/user';
+import {Link} from 'react-router-dom'
+import { useContext } from 'react';
 import './Header.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-function Header() {
-    let user = getUserData();
-    // const [user, setUser] = useState({});
+import { UserContext } from '../../UserContext';
 
-    // useEffect(() => {
-    //     
-    //     if (!user) {
-    //         setUser(user)
-    //     }
-    // }, [user])
+function Header() {
+    const {user, setUser} = useContext(UserContext);
+
     return (
         <div className="header">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="/">
+                <Navbar.Brand as={Link} to="/">
 
                     <img
                         src="../../logo.png"
@@ -28,13 +23,13 @@ function Header() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        {user != null ? <Nav.Link href={`/images/${user.id}`}>My Photos</Nav.Link> : null}
-                        <NavDropdown title="My Photos" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Nature</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">People</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Vacation</NavDropdown.Item>
+                        {user != null ? <Nav.Link as={Link} to={`/images/${user.user.id}`}>My Photos</Nav.Link> : null}
+                            <NavDropdown title="My Photos" id="collasible-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="#action/3.1">Nature</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="#action/3.2">People</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="#action/3.3">Vacation</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="/images/upload">Upload Image</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/images/upload">Upload Image </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav>
@@ -50,18 +45,18 @@ function Header() {
                             {user != null ?
                                 null
                                 :
-                                <NavDropdown.Item href="/users/register">Register</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/users/register">Register</NavDropdown.Item>
                             }
 
                             {user != null
                                 ?
-                                <NavDropdown.Item onClick={() => setUser(null)} href="/users/logout">Logout</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/users/logout">Logout</NavDropdown.Item>
                                 :
-                                <NavDropdown.Item href="/users/login">Login</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/users/login">Login</NavDropdown.Item>
                             }
                             <NavDropdown.Divider />
                             {user != null ?
-                                <NavDropdown.Item href={`/users/details/${user.id}`}>My Profile</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={`/users/details/${user.user.id}`}>My Profile</NavDropdown.Item>
                                 :
                                 null
                             }
