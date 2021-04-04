@@ -6,12 +6,9 @@ import { auth } from './firebase';
 auth.onAuthStateChanged(function (data) {
     if (data) {
         getUserFromDB(data.email).then((user) => {
-            console.log(user)
             Cookies.set('auth', { username: user.username, email: user.email, id: user.id });
         })
-    } else {
-        Cookies.remove('auth')
-    }
+    } 
 });
 
 export function setUserData(user, username) {
@@ -48,7 +45,7 @@ export function getUserId() {
     if (user !== '') {
         return JSON.parse(user).id;
     } else {
-        return null
+        return null;
     }
 }
 
@@ -57,20 +54,15 @@ export async function login(email, password) {
 }
 
 export async function register(email, password) {
-
-    return auth.createUserWithEmailAndPassword(email, password)
-
+    return auth.createUserWithEmailAndPassword(email, password);
 }
 
 export async function logout() {
-
+    Cookies.remove('auth');
     return auth.signOut()
         .catch((error) => {
             throw new Error(error);
         });
-
-
-
 }
 
 export function checkFieldsInForm(username, password, rePassword, email) {

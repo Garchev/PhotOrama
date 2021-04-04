@@ -6,7 +6,6 @@ function ImageFrame({
     imageUrl,
     author,
     imageName,
-    description,
     likes
 }) {
     return (

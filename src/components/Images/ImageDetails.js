@@ -29,9 +29,10 @@ function ImageDetails ({match, history}) {
 
             <Container className="imageContainer" id="detailsContainer" fluid="sm">
                 <h3>{img.imageName}</h3>
-                 <p>Likes: {img.likes.length}
-                 {isLiked ? null : <Button variant="primary" onClick={handleLike}> Like </Button>}
+                 <p id="likesParagraph">Likes: {img.likes.length}
                 </p>
+                 {isLiked ? null : <Button variant="primary" onClick={handleLike} id="likeButton" size="sm">
+                  Like </Button>}
                 <Image className="image" src={img.url} />
                 <p id="descriptionParagraph">Image Description: {img.description}</p>
                 { user.user.username === img.author ? 

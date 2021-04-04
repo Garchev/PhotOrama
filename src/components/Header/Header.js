@@ -59,6 +59,11 @@ function Header() {
                             drop="left" id="collasible-nav-dropdown">
 
                             {user != null ?
+                                <NavDropdown.Item disabled>{user.user.username}</NavDropdown.Item>
+                                :
+                                null
+                            }
+                            {user != null ?
                                 null
                                 :
                                 <NavDropdown.Item as={Link} to="/users/register">Register</NavDropdown.Item>

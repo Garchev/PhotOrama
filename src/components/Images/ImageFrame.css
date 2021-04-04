@@ -59,3 +59,12 @@
 #descriptionParagraph {
     padding-block: 10px;
 }
+
+#likeButton {
+left:auto
+}
+
+/* #likesParagraph {
+    position:fixed;
+    display: flex;
+} */
