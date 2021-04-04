@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import Cookie from 'js-cookie';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { uploadImage } from '../../services/images';
 import './Upload.css';
@@ -11,9 +10,8 @@ function Upload({ history }) {
     const [imageName, setImageName] = useState('');
     const [imageDescr, setImageDescr] = useState('');
     const [imageCategory, setImageCategory] = useState('');
-    const cookie = JSON.parse(Cookie.get('auth'));
 
-    const {user, setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
     const handleError = (e) => {
         let errorBar = document.getElementById('error');

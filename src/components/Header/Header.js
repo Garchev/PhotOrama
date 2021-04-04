@@ -1,11 +1,26 @@
-import {Link} from 'react-router-dom'
-import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import './Header.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { UserContext } from '../../UserContext';
-
 function Header() {
-    const {user, setUser} = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
+    useEffect(() => {
+        let cookie = Cookies.get('auth');
+        if (cookie) {
+            if (!user) {
+                setUser({
+                    loggedIn: true,
+                    user: {
+                        username: cookie.username,
+                        email: cookie.email,
+                        id: cookie.id
+                    }
+                })
+            }
+        }
+    }, [user, setUser])
 
     return (
         <div className="header">
@@ -24,7 +39,7 @@ function Header() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                         {user != null ? <Nav.Link as={Link} to={`/images/${user.user.id}`}>My Photos</Nav.Link> : null}
-                            <NavDropdown title="My Photos" id="collasible-nav-dropdown">
+                        <NavDropdown title="My Photos" id="collasible-nav-dropdown">
                             <NavDropdown.Item as={Link} to="#action/3.1">Nature</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="#action/3.2">People</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="#action/3.3">Vacation</NavDropdown.Item>
@@ -48,12 +63,13 @@ function Header() {
                                 <NavDropdown.Item as={Link} to="/users/register">Register</NavDropdown.Item>
                             }
 
-                            {user != null
-                                ?
+
+                            {user != null ?
                                 <NavDropdown.Item as={Link} to="/users/logout">Logout</NavDropdown.Item>
                                 :
                                 <NavDropdown.Item as={Link} to="/users/login">Login</NavDropdown.Item>
                             }
+
                             <NavDropdown.Divider />
                             {user != null ?
                                 <NavDropdown.Item as={Link} to={`/users/details/${user.user.id}`}>My Profile</NavDropdown.Item>

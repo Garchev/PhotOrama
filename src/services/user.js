@@ -3,13 +3,15 @@ import { db } from './firebase';
 import { auth } from './firebase';
 
 
-auth.onAuthStateChanged(function(user) {
-    if (user) {
-        Cookies.set('auth', { username: user.displayName, email: user.email, id: user.uid });
+auth.onAuthStateChanged(function (data) {
+    if (data) {
+        getUserFromDB(data.email).then((user) => {
+            Cookies.set('auth', { username: user.username, email: user.email, id: user.id });
+        })
     } else {
         Cookies.remove('auth')
     }
-  });
+});
 
 export function setUserData(user, username) {
     Cookies.set('auth', { username: username, email: user.email, id: user.uid });
@@ -18,14 +20,14 @@ export function setUserData(user, username) {
 export function getUserData() {
     let cookie = Cookies.get('auth')
 
-    return cookie ? JSON.parse(cookie) : null ;
+    return cookie ? JSON.parse(cookie) : null;
 }
 
-export async function setUserInDB({email, uid}, username) {
+export async function setUserInDB({ email, uid }, username) {
     db.collection("users").add({
         username: username,
         email: email,
-        id:uid,
+        id: uid,
         images: []
     })
         .catch((error) => {
@@ -36,8 +38,8 @@ export async function setUserInDB({email, uid}, username) {
 export async function getUserFromDB(email) {
     let userRef = await db.collection("users").where('email', '==', email).get().then(data => data.d_.docs['0'].id)
     let user = db.collection("users").doc(userRef);
-    let username = await user.get().then(doc => doc.data().username);
-    return username;
+
+    return await user.get().then(doc => doc.data());
 }
 
 export function getUserId() {
@@ -56,15 +58,15 @@ export async function login(email, password) {
 export async function register(email, password) {
 
     return auth.createUserWithEmailAndPassword(email, password)
-        
+
 }
 
 export async function logout() {
-    
+
     return auth.signOut()
-    .catch((error) => {
-        throw new Error(error);
-    });
+        .catch((error) => {
+            throw new Error(error);
+        });
 
 
 
@@ -88,7 +90,7 @@ export function checkFieldsInForm(username, password, rePassword, email) {
     }
 
     if (!userRegex.test(username)) {
-        
+
         throw new Error('Username must contain only english letters and numbers');
     }
 
