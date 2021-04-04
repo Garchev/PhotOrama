@@ -1,38 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {Container, Image} from 'react-bootstrap'
+import {Container, Image, Button} from 'react-bootstrap'
 import * as imageServices from '../../services/images'
 import './ImageFrame.css';
-
-const ImageDetails = ({
-    match
-}) => {
-    let [img, setImg] = useState({});
-    let [isLoaded, setIsloaded] = useState(false)
+import {UserContext} from '../../UserContext'
+function ImageDetails ({match, history}) {
+    const [img, setImg] = useState({});
+    const [isLoaded, setIsloaded] = useState(false);
+    
+    const {user} = useContext(UserContext)
+    
     useEffect(() => {
         imageServices.getOne(match.params.id).then((res) => {
             setImg(res.data())
             setIsloaded(true);
         })
-    }, [match.params.id] );
+    }, [match.params.id, img] );
+
+    function handleLike (e) {
+        imageServices.addLikeToImage(match.params.id, user.user.id);
+        setImg(null);
+        setIsloaded(false);
+    }
 
     if (isLoaded) {
-
+        let isLiked = img.likes.includes(user.user.id)
         return (
 
             <Container className="imageContainer" id="detailsContainer" fluid="sm">
-                <h3>{img.title}</h3>
-                <p>Likes: {img.likes}
-                    <button className="button" >
-                        <i className="fas fa-heart"></i>Like
-                </button>
+                <h3>{img.imageName}</h3>
+                 <p>Likes: {img.likes.length}
+                 {isLiked ? null : <Button variant="primary" onClick={handleLike}> Like </Button>}
                 </p>
                 <Image className="image" src={img.url} />
-                <p className="description">{img.description}</p>
-                <div className="pet-info">
-                    <Link to={`/images/details/${img.id}/edit`}><button className="button">Edit</button></Link>
-                    <Link to="/images/details"><button className="button">Delete</button></Link>
-                </div>
+                <p id="descriptionParagraph">Image Description: {img.description}</p>
+                { user.user.username === img.author ? 
+                <div>
+                    <Link to={`/images/details/${match.params.id}/edit`}><Button varidnt="primary">Edit</Button></Link>
+                    <Link to="/images/details"><Button varidnt="primary">Delete</Button></Link>
+                </div> 
+                : null }
             </Container>
         );
     } else {

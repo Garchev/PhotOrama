@@ -10,6 +10,7 @@ function Header() {
         let cookie = Cookies.get('auth');
         if (cookie) {
             if (!user) {
+                cookie = JSON.parse(cookie)
                 setUser({
                     loggedIn: true,
                     user: {

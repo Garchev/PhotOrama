@@ -6,6 +6,7 @@ import { auth } from './firebase';
 auth.onAuthStateChanged(function (data) {
     if (data) {
         getUserFromDB(data.email).then((user) => {
+            console.log(user)
             Cookies.set('auth', { username: user.username, email: user.email, id: user.id });
         })
     } else {

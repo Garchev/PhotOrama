@@ -4,11 +4,10 @@ import { getUserFromDB } from './user';
 
 export async function uploadImage(image, user, imageName, imageDescr, imageCategory) {
     console.log(user)
-    
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
         'state-changed',
-        snapshot => {},
+        snapshot => { },
         error => {
             throw new Error(error);
         },
@@ -24,7 +23,7 @@ export async function uploadImage(image, user, imageName, imageDescr, imageCateg
                         author: user.username,
                         category: imageCategory,
                         url: url,
-                        likes: 0
+                        likes: []
                     }).then(res => {
                         db.collection("users").where("username", "==", user.username).get().then((e) => {
                             let ref = db.collection("users").doc(e.docs['0'].id);
@@ -92,8 +91,16 @@ export async function getTop3Images() {
             console.log("Error getting documents: ", error);
         });
     let top = images.sort((a, b) => {
-        return (Number(b.likes) - Number(a.likes))
+        return (b.likes.length - a.likes.length)
     });
     top = top.slice(0, 3)
     return top;
+}
+
+export async function addLikeToImage(imageId, userId) {
+
+    let imageRef = db.collection("images").doc(imageId);
+    imageRef.update({
+        likes: firebase.firestore.FieldValue.arrayUnion(userId)
+    });
 }
