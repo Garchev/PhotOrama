@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as imageServices from '../../services/images';
 import { UserContext } from '../../UserContext';
 import ImageFrame from '../Images/ImageFrame';
@@ -13,7 +14,7 @@ class Home extends Component {
     static contextType = UserContext;
 
     componentDidMount() {
-            imageServices.getTop3Images()
+        imageServices.getTop3Images()
             .then(res => {
                 this.setState({ images: res });
             });
@@ -22,18 +23,18 @@ class Home extends Component {
     render() {
         let content;
         if (this.state.images.length > 0) {
-              content = 
-              <div className="homeContent">
-                <h1>Welcome to PhotOrama!</h1>
-                <h2>Here's the top 3 liked photos</h2>
-                <ul>
-                {this.state.images.map(x => 
-                    <ImageFrame key={x.id} {...x} />
-                )} 
-                </ul>
-              </div>
+            content =
+                <div className="homeContent">
+                    <h1>Welcome to PhotOrama!</h1>
+                    <h2>Here's the top 3 liked photos</h2>
+                    <ul>
+                        {this.state.images.map(x =>
+                            <ImageFrame key={x.id} {...x} />
+                        )}
+                    </ul>
+                </div>
         } else {
-            content =  <h2> Loading...</h2>
+            content = <h2> Loading...</h2>
         }
         return content;
     }

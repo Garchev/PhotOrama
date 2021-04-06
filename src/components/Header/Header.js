@@ -39,14 +39,14 @@ function Header() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        {user != null ? <Nav.Link as={Link} to={`/images/${user.user.id}`}>My Photos</Nav.Link> : null}
-                        <NavDropdown title="My Photos" id="collasible-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="#action/3.1">Nature</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="#action/3.2">People</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="#action/3.3">Vacation</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item as={Link} to="/images/upload">Upload Image </NavDropdown.Item>
-                        </NavDropdown>
+                        {user != null ?
+                            <NavDropdown title="My Photos" id="collasible-nav-dropdown">
+                                <NavDropdown.Item as={Link} to={`/users/${user.user.id}/images`}>My Photos</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/images/all">All users images</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item as={Link} to="/images/upload">Upload Image </NavDropdown.Item>
+                            </NavDropdown>
+                            : null}
                     </Nav>
                     <Nav>
                         <NavDropdown title={
@@ -78,7 +78,7 @@ function Header() {
 
                             <NavDropdown.Divider />
                             {user != null ?
-                                <NavDropdown.Item as={Link} to={`/users/details/${user.user.id}`}>My Profile</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={`/users/${user.user.id}/details`}>My Profile</NavDropdown.Item>
                                 :
                                 null
                             }

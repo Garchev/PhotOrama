@@ -64,7 +64,6 @@
 left:auto
 }
 
-/* #likesParagraph {
-    position:fixed;
-    display: flex;
-} */
+ #categoryParagraph {
+    padding-top: 10px;
+} 

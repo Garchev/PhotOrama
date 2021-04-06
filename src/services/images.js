@@ -41,7 +41,7 @@ export async function getOne(id) {
     return await db.collection("images").doc(id).get().then((res) => res)
 }
 
-export async function getAllImages(email) {
+export async function getAllUserImages(email) {
     if (!email) {
         return null;
     }
@@ -49,6 +49,31 @@ export async function getAllImages(email) {
 
     let images = [];
     await db.collection('images').where("author", "==", user.username).get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                images.push(
+                    {
+                        id: doc.id,
+                        author: doc.data().author,
+                        imageUrl: doc.data().url,
+                        imageName: doc.data().imageName,
+                        description: doc.data().description,
+                        category: doc.data().category,
+                        likes: doc.data().likes
+                    })
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+    return images;
+}
+
+export async function getAllImages() {
+   
+    let images = [];
+    await db.collection('images').get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 images.push(

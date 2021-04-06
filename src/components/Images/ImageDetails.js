@@ -34,7 +34,8 @@ function ImageDetails ({match, history}) {
                  {isLiked ? null : <Button variant="primary" onClick={handleLike} id="likeButton" size="sm">
                   Like </Button>}
                 <Image className="image" src={img.url} />
-                <p id="descriptionParagraph">Image Description: {img.description}</p>
+                <p id="categoryParagraph">Image category: {img.category}</p>
+                <p id="descriptionParagraph">Image Description: <br/>{img.description}</p>
                 { user.user.username === img.author ? 
                 <div>
                     <Link to={`/images/details/${match.params.id}/edit`}><Button varidnt="primary">Edit</Button></Link>

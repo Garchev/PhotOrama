@@ -12,16 +12,14 @@
 }
 
 .btn-primary {
-color: rgb(255, 255, 255);
-position: relative;
-left: 11rem;
-margin-bottom: 15px;
+    color: rgb(255, 255, 255);
+    position: relative;
+    left: 11rem;
+    margin-bottom: 15px;
 }
 
 .form-label {
     color: rgb(255, 255, 255);
- 
-
 }
 
 .form-control:focus {
@@ -29,6 +27,18 @@ margin-bottom: 15px;
     border-top: 0px;
     border-left: 0px;
     border-style: none;
+}
+
+.userDetails {
+    color: aliceblue;
+    display: block;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.userDetails  a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
 }
 
 #error {
