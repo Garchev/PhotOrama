@@ -37,6 +37,19 @@ export async function uploadImage(image, user, imageName, imageDescr, imageCateg
 
 }
 
+export async function updateImage(id, imageName, imageDescr, imageCategory) {
+    let imageRef = db.collection("images").doc(id);
+
+    return imageRef.update({
+        imageName: imageName,
+        description: imageDescr,
+        category: imageCategory
+    })
+        .catch((error) => {
+            throw new Error( error);
+        });
+}
+
 export async function getOne(id) {
     return await db.collection("images").doc(id).get().then((res) => res)
 }
@@ -64,14 +77,14 @@ export async function getAllUserImages(email) {
             });
         })
         .catch((error) => {
-            console.log("Error getting documents: ", error);
+            throw new Error( error);
         });
 
     return images;
 }
 
 export async function getAllImages() {
-   
+
     let images = [];
     await db.collection('images').get()
         .then((querySnapshot) => {
@@ -89,7 +102,7 @@ export async function getAllImages() {
             });
         })
         .catch((error) => {
-            console.log("Error getting documents: ", error);
+            throw new Error( error);
         });
 
     return images;

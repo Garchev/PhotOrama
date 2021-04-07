@@ -34,12 +34,14 @@ function ImageDetails ({match, history}) {
                  {isLiked ? null : <Button variant="primary" onClick={handleLike} id="likeButton" size="sm">
                   Like </Button>}
                 <Image className="image" src={img.url} />
-                <p id="categoryParagraph">Image category: {img.category}</p>
-                <p id="descriptionParagraph">Image Description: <br/>{img.description}</p>
+                <label id="categoryParagraph">Image category:</label>
+                <h4> {img.category}</h4>
+                <label id="descritexttionParagraph">Image Description:</label>
+                <h5>{img.description}</h5>
                 { user.user.username === img.author ? 
                 <div>
-                    <Link to={`/images/details/${match.params.id}/edit`}><Button varidnt="primary">Edit</Button></Link>
-                    <Link to="/images/details"><Button varidnt="primary">Delete</Button></Link>
+                    <Link to={`/images/${match.params.id}/edit`}><Button varidnt="primary" id="editBtn">Edit</Button></Link>
+                    <Link to="/images/delete"><Button varidnt="primary" id="deleteBtn">Delete</Button></Link>
                 </div> 
                 : null }
             </Container>

@@ -7,6 +7,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import UserDetails from './components/Auth/UserDetails'
 import Upload from './components/Files/Upload';
+import EditImage from './components/Images/EditImage';
 import MyImages from './components/Images/MyImages';
 import AllImages from './components/Images/AllImages';
 import ImageDetails from './components/Images/ImageDetails';
@@ -32,6 +33,7 @@ function App() {
 						<Route path="/users/:id/images" component={MyImages} />
 						<Route path="/images/all" component={AllImages} />
 						<Route path="/images/upload" component={Upload} />
+						<Route path="/images/:id/edit" component={EditImage} />
 						<Route path="/images/details/:id" component={ImageDetails} />
 					</Switch>
 				</UserContext.Provider>

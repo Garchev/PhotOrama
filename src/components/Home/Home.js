@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import * as imageServices from '../../services/images';
 import { UserContext } from '../../UserContext';
 import ImageFrame from '../Images/ImageFrame';

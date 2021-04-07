@@ -16,7 +16,8 @@ function ImageFrame({
 
             <table className="image-details">
                 <tbody>
-                    <tr><td>Author: {author}</td></tr>
+                    <tr><td>Author:</td></tr>
+                    <tr><td id="authorName"><h4>{author}</h4></td></tr>
                     <tr><td>Likes: {likes.length}</td></tr>
                 </tbody>
             </table>

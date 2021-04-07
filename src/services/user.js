@@ -74,7 +74,7 @@ export function checkFieldsInForm(username, password, rePassword, email) {
     }
 
     if (password.length < 5) {
-        throw Error('Password should be at least 5 characters long');
+        throw new Error('Password should be at least 5 characters long');
     }
 
     if (username.length < 4) {

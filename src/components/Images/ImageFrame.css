@@ -16,7 +16,7 @@
     margin-bottom: 50px;
 }
 
-.imageContainer h3 {
+.imageContainer h3, h4 , h5{
     text-shadow: 2px 2px rgba(0, 0, 0, 60%);
 }
 
@@ -52,8 +52,10 @@
 }
 
 #detailsContainer {
+    width: 50%;
     max-width: 75%;
     color: aliceblue;
+    padding-bottom: 14px;
 }
 
 #descriptionParagraph {
@@ -62,6 +64,17 @@
 
 #likeButton {
 left:auto
+}
+
+#editBtn, #deleteBtn {
+    left:auto;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#authorName {
+    font-weight: bold;
+    font-style:italic;
 }
 
  #categoryParagraph {

@@ -61,7 +61,7 @@ function Upload({ history }) {
                     <Form.Control as="select" name="imageCategory" onChange={(e) => setImageCategory(e.target.value)}>
                         <option value="Nature">Nature</option>
                         <option value="People">People</option>
-                        <option value="Vacation">Other</option>
+                        <option value="Other">Other</option>
                     </Form.Control>
                 </Form.Group>
 

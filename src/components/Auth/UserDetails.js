@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import {  useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container } from 'react-bootstrap';
@@ -7,7 +7,7 @@ import './Auth.css';
 
 
 
-function UserDetails({match}) {
+function UserDetails() {
 
     const { user } = useContext(UserContext).user;
     
@@ -25,7 +25,7 @@ function UserDetails({match}) {
                 <h3>{user.email}</h3>
             </div>
             <div>
-                <h5><Link to={`/users/${user.id}/images`}>Images:</Link> </h5>
+                <h5><Link to={`/users/${user.id}/images`}>My Images</Link> </h5>
             </div>
         </Container>
     )
