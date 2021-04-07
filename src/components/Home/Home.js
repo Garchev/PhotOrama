@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as imageServices from '../../services/images';
-import { UserContext } from '../../UserContext';
 import ImageFrame from '../Images/ImageFrame';
 import './Home.css';
 class Home extends Component {
@@ -10,7 +9,7 @@ class Home extends Component {
             images: []
         }
     }
-    static contextType = UserContext;
+    
 
     componentDidMount() {
         imageServices.getTop3Images()

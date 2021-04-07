@@ -6,14 +6,14 @@ class Register extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+
             email: '',
             password: '',
             rePassword: '',
             username: ''
         }
     }
-
+     
     changeProp = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -36,8 +36,8 @@ class Register extends Component {
             userServices.register(this.state.email, this.state.password, this.state.username)
                 .then(user => {
                     userServices.setUserInDB(user.user, this.state.username);
-                    userServices.login(this.state.email, this.state.password);
-                    this.props.history.push('/')
+                }).then(() => {
+                    this.props.history.push('/users/login')
                 }).catch((e) => {
                     this.handleError(e);
                 })
