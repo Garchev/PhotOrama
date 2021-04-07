@@ -12,7 +12,7 @@ function Login({ history }) {
         let email = event.target.email.value;
         let password = event.target.password.value;
         try {
-            await userServices.login(email, password)
+            await userServices.login(email, password);
             await userServices.getUserFromDB(email).then((user) => {
                 setUser({
                     loggedIn: true,

@@ -1,4 +1,4 @@
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
@@ -16,8 +16,8 @@ import { UserContext } from './UserContext';
 
 function App() {
 	const [user, setUser] = useState(null);
-	const userValue = useMemo(() => ({ user, setUser }), [user, setUser])
-
+	const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+	const isLogged = user && user.loggedIn;
 
 	return (
 		<div>
@@ -29,11 +29,11 @@ function App() {
 						<Route path="/users/login" component={Login} />
 						<Route path="/users/register" component={Register} />
 						<Route path="/users/logout" component={Logout} />
-						<Route path="/users/:id/details" exact component={UserDetails} />
-						<Route path="/users/:id/images" component={MyImages} />
-						<Route path="/images/all" component={AllImages} />
-						<Route path="/images/upload" component={Upload} />
-						<Route path="/images/:id/edit" component={EditImage} />
+						<Route path="/users/:id/details" exact >{ isLogged ? <UserDetails/> : <Redirect to='/'/>} </Route>
+						<Route path="/users/:id/images"> {isLogged ? <MyImages/> : <Redirect to='/' />} </Route>
+						<Route path="/images/all"> {isLogged ? <AllImages/> : <Redirect to='/' />} </Route>
+						<Route path="/images/upload">{isLogged ? <Upload/> : <Redirect to='/' />} </Route>
+						<Route path="/images/:id/edit"> {isLogged ? <EditImage/> : <Redirect to='/'/>} </Route>
 						<Route path="/images/details/:id" component={ImageDetails} />
 					</Switch>
 				</UserContext.Provider>
