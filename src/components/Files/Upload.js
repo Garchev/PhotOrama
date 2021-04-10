@@ -5,14 +5,14 @@ import './Upload.css';
 import { UserContext } from '../../UserContext';
 
 
-function Upload({ history }) {
+function Upload({history}) {
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState('');
     const [imageDescr, setImageDescr] = useState('');
     const [imageCategory, setImageCategory] = useState('');
 
     const {user} = useContext(UserContext);
-
+  
     const handleError = (e) => {
         let errorBar = document.getElementById('error');
                 errorBar.innerText = e;

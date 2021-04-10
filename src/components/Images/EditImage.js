@@ -9,7 +9,6 @@ function EditImage({ match, history }) {
     
     const [isLoaded, setIsloaded] = useState(false);
 
-    
     useEffect(() => {
         getOne(match.params.id).then((res) => {
             setImage(res.data())
@@ -42,19 +41,21 @@ if(isLoaded){
             <Form  onSubmit={handleUpdate}>
                 <Form.Group>
                     <Alert id="error" variant="danger">Error</Alert>
+                    <Form.Label>Image Name</Form.Label>
                     <Form.Control 
                         id="imageName"
                         name="imageName"
                         type="text"
                         defaultValue= {image.imageName}
-                        label="Image Name"
                     />
+                    <Form.Label>Image Description</Form.Label>
                     <Form.Control                         
                         id="imageDescr" name="imageDescr"
                         type="text"
                         defaultValue={image.description}
-                        label="Image Description"
+                        
                     />
+                    <Form.Label>Category</Form.Label>
                     <Form.Control as="select" name="imageCategory" defaultValue={image.category}>
                         <option value="Nature">Nature</option>
                         <option value="People">People</option>

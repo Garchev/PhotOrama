@@ -25,7 +25,7 @@ function MyImages() {
         content =
             <div className="userContent">
                 <h1>{user.user.username} photos:</h1>
-                {images === null ? <h2>It seems, that you don't have uploaded images yet</h2>
+                {images === null || images.length === 0 ? <h2>It seems, that you don't have uploaded images yet</h2>
                 :
                 <ul>
                     {images.map(x =>

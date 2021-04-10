@@ -3,7 +3,6 @@ import firebase from 'firebase';
 import { getUserFromDB } from './user';
 
 export async function uploadImage(image, user, imageName, imageDescr, imageCategory) {
-    console.log(user)
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
         'state-changed',
@@ -126,19 +125,24 @@ export async function getTop3Images() {
             });
         })
         .catch((error) => {
-            console.log("Error getting documents: ", error);
+            throw new Error( error);
         });
-    let top = images.sort((a, b) => {
+    
+        let top = images.sort((a, b) => {
         return (b.likes.length - a.likes.length)
     });
+
     top = top.slice(0, 3)
     return top;
 }
 
 export async function addLikeToImage(imageId, userId) {
-
     let imageRef = db.collection("images").doc(imageId);
     imageRef.update({
         likes: firebase.firestore.FieldValue.arrayUnion(userId)
     });
+}
+
+export async function deleteImage(id) {
+    return db.collection("images").doc(id).delete()
 }

@@ -23,8 +23,16 @@ function ImageDetails ({match, history}) {
         setIsloaded(false);
     }
 
+    function handleDeleteImage() {
+        imageServices.deleteImage(match.params.id).then(() => {
+            history.push('/')
+        })
+        .catch((e) => console.log(e))
+    }
+
+
     if (isLoaded) {
-        let isLiked = img.likes.includes(user.user.id)
+        let isLiked = img.likes.includes(user?.user.id) || true
         return (
 
             <Container className="imageContainer" id="detailsContainer" fluid="sm">
@@ -38,10 +46,10 @@ function ImageDetails ({match, history}) {
                 <h4> {img.category}</h4>
                 <label id="descritexttionParagraph">Image Description:</label>
                 <h5>{img.description}</h5>
-                { user.user.username === img.author ? 
+                { user?.user.username === img.author ? 
                 <div>
                     <Link to={`/images/${match.params.id}/edit`}><Button varidnt="primary" id="editBtn">Edit</Button></Link>
-                    <Link to="/images/delete"><Button varidnt="primary" id="deleteBtn">Delete</Button></Link>
+                    <Link to={`/images/${match.params.id}delete`}><Button varidnt="primary" id="deleteBtn" onClick={handleDeleteImage}>Delete</Button></Link>
                 </div> 
                 : null }
             </Container>
