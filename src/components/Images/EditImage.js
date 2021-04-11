@@ -29,7 +29,7 @@ function EditImage({ match, history }) {
     function handleUpdate (e) {
         e.preventDefault();
         updateImage(match.params.id, e.target.imageName.value, e.target.imageDescr.value, e.target.imageCategory.value)
-            .then(() => history.push('/'))
+            .then(() => history.push(`/images/details/${match.params.id}`))
             .catch((e) => handleError(e))
     }
 

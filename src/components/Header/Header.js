@@ -41,7 +41,7 @@ function Header() {
                     <Nav className="mr-auto">
                         {user != null ?
                             <NavDropdown title="My Photos" id="collasible-nav-dropdown">
-                                <NavDropdown.Item as={Link} to={`/users/${user.user.id}/images`}>My Photos</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={`/users/${user.user.id}/images`}>My Images</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} to="/images/all">All users images</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item as={Link} to="/images/upload">Upload Image </NavDropdown.Item>

@@ -132,8 +132,7 @@ export async function getTop3Images() {
         return (b.likes.length - a.likes.length)
     });
 
-    top = top.slice(0, 3)
-    return top;
+    return top.slice(0, 3)
 }
 
 export async function addLikeToImage(imageId, userId) {

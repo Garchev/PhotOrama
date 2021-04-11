@@ -25,14 +25,15 @@ function ImageDetails ({match, history}) {
 
     function handleDeleteImage() {
         imageServices.deleteImage(match.params.id).then(() => {
-            history.push('/')
+            history.push(`/users/${user.user.id}/images`)
         })
         .catch((e) => console.log(e))
     }
 
 
     if (isLoaded) {
-        let isLiked = img.likes.includes(user?.user.id) || true
+        let isLiked = user ? img.likes.includes(user.user.id) : true
+        
         return (
 
             <Container className="imageContainer" id="detailsContainer" fluid="sm">
