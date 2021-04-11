@@ -1,14 +1,13 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCOZnIFg0vxTm_1PElxbHYbyF-k9nmKGTo",
-    authDomain: "photobase-ac586.firebaseapp.com",
-    databaseURL: "https://photobase-ac586-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "photobase-ac586",
-    storageBucket: "photobase-ac586.appspot.com",
-    messagingSenderId: "654772891078",
-    appId: "1:654772891078:web:8f2a807f354e52cd8e16c7",
-    measurementId: "G-QFLYQPWCD6"
+    apiKey: "AIzaSyCUqtPCx0Z975rEMct90RLo4fON5oGGV2I",
+    authDomain: "photoramaproj.firebaseapp.com",
+    projectId: "photoramaproj",
+    storageBucket: "photoramaproj.appspot.com",
+    messagingSenderId: "648615175331",
+    appId: "1:648615175331:web:2f6edbf1e98df7e5ff8b16"
+   
 };
 
 firebase.initializeApp(firebaseConfig);
