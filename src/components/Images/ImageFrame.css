@@ -1,7 +1,7 @@
 .imageContainer {
-    height: auto;
-    max-width: 50%;
-    padding-top: 15px;
+    display: flex;
+    max-width: 50vw;
+    padding: 15px 0px 15px 0px ;
     border-radius: 15px;
     position: relative;
     top: 27px;
@@ -9,25 +9,24 @@
     background-color: rgba(77, 75, 75, 80%);
     text-align: center;
     box-shadow: 4px 4px rgba(0, 0, 0, 60%);
-    
+    flex-direction: column;
 }
 
 .imageContainer:last-of-type {
     margin-bottom: 50px;
 }
 
-.imageContainer h3, h4 , h5{
+.imageContainer h3, h4 , h5, p{
     text-shadow: 2px 2px rgba(0, 0, 0, 60%);
+    margin: 0;
 }
 
 .imageContainer .image {
+    align-self: center;
+    width: 90%;
     object-fit:fill;
     object-position: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: 10px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 25%)
 }
 
@@ -60,6 +59,7 @@
 
 #descriptionParagraph {
     padding-block: 10px;
+    font-style: oblique;
 }
 
 #likeButton {

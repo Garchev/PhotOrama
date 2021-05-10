@@ -13,7 +13,7 @@ class Register extends Component {
             username: ''
         }
     }
-     
+    
     changeProp = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }

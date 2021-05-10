@@ -15,7 +15,7 @@ function ImageDetails ({match, history}) {
             setImg(res.data())
             setIsloaded(true);
         })
-    }, [match.params.id, img] );
+    }, [] );
 
     function handleLike (e) {
         imageServices.addLikeToImage(match.params.id, user.user.id);
@@ -38,14 +38,14 @@ function ImageDetails ({match, history}) {
 
             <Container className="imageContainer" id="detailsContainer" fluid="sm">
                 <h3>{img.imageName}</h3>
-                 <p id="likesParagraph">Likes: {img.likes.length}
+                 <p id="likesParagraph"><em>Likes:</em> {img.likes.length}
                 </p>
                  {isLiked ? null : <Button variant="primary" onClick={handleLike} id="likeButton" size="sm">
                   Like </Button>}
                 <Image className="image" src={img.url} />
-                <label id="categoryParagraph">Image category:</label>
+                <p id="categoryParagraph"><em>Image category:</em></p>
                 <h4> {img.category}</h4>
-                <label id="descritexttionParagraph">Image Description:</label>
+                <p id="descritexttionParagraph"><em>Image Description:</em></p>
                 <h5>{img.description}</h5>
                 { user?.user.username === img.author ? 
                 <div>

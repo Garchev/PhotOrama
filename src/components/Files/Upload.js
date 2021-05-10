@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { uploadImage } from '../../services/images';
-import './Upload.css';
 import { UserContext } from '../../UserContext';
+import './Upload.css';
 
 
 function Upload({history}) {

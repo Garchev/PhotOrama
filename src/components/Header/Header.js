@@ -24,7 +24,7 @@ function Header() {
     }, [user, setUser])
 
     return (
-        <div className="header">
+        <header className="header">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">
 
@@ -86,7 +86,7 @@ function Header() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </div>
+        </header>
     )
 }
 
