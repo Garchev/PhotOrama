@@ -11,11 +11,11 @@ function ImageFrame({
 }) {
     return (
         <Container className="imageContainer" fluid='sm'>
-            <Link className="link-details" to={`/images/details/${id}`} > <h3> {imageName}</h3></Link>
+            <Link className="link-details" to={`/images/details/${id}`} > <h3><em>{imageName}</em></h3></Link>
             <Image className="image" src={imageUrl} fluid />
-            <p><q> Author: </q></p>
+            <p><em> Author: </em></p>
             <h4 id="authorName"> {author} </h4>
-            <p> Likes: {likes.length}</p>
+            <p><em>Likes:</em> {likes.length}</p>
         </Container>
     )
 }

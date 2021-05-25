@@ -37,11 +37,11 @@ function ImageDetails ({match, history}) {
         return (
 
             <Container className="imageContainer" id="detailsContainer" fluid="sm">
-                <h3>{img.imageName}</h3>
-                 <p id="likesParagraph"><em>Likes:</em> {img.likes.length}
-                </p>
-                 {isLiked ? null : <Button variant="primary" onClick={handleLike} id="likeButton" size="sm">
-                  Like </Button>}
+                <h3><em>{img.imageName}</em></h3>
+                 <p id="likesParagraph"><em>Likes:</em> <strong>{img.likes.length}</strong></p>
+
+                 {isLiked ? null :
+                  <Button variant="primary" onClick={handleLike} id="likeButton" size="sm"> Like </Button>}
                 <Image className="image" src={img.url} />
                 <p id="categoryParagraph"><em>Image category:</em></p>
                 <h4> {img.category}</h4>
