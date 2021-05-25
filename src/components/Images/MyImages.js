@@ -1,4 +1,5 @@
 import { useEffect, useContext, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import * as imageServices from '../../services/images';
 import { UserContext } from '../../UserContext';
 import ImageFrame from './ImageFrame';
@@ -34,7 +35,11 @@ function MyImages() {
                 </ul>}
             </div>
     } else {
-        content = <h2> Loading...</h2>
+        content =  <>
+        <Spinner animation="border" role="status">
+        </Spinner>
+        <h3 >Loading...</h3>
+    </>
     }
     return content;
 

@@ -1,7 +1,6 @@
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 
-
 #authContainer {
     max-width: 466px;
     padding-top: 15px;
@@ -13,9 +12,7 @@
 
 .btn-primary {
     color: rgb(255, 255, 255);
-    position: relative;
-    left: 11rem;
-    margin-bottom: 15px;
+    margin-top: 1em;
 }
 
 .form-label {

@@ -39,7 +39,7 @@ function Upload({history}) {
 
     return (
         <Container id="uploadContainer" fluid="sm">
-            <Form>
+            <Form className = "upload-form">
                 <Form.Group>
                     <Alert id="error" variant="danger">Error</Alert>
                     <Form.File id="custom-file" label="Choose image to upload" onChange={handleChange} />

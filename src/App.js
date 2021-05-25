@@ -1,4 +1,4 @@
-import { Route, Switch, BrowserRouter} from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
@@ -20,25 +20,28 @@ function App() {
 	const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
 	return (
-		<body>
-			<BrowserRouter >
-				<UserContext.Provider value={userValue}>
-					<Header />
+
+		<BrowserRouter >
+			<UserContext.Provider value={userValue}>
+				<Header />
+				<main>
+
 					<Switch>
 						<Route path="/" exact component={Home} />
 						<Route path="/users/login" component={Login} />
 						<Route path="/users/register" component={Register} />
 						<Route path="/users/logout" component={Logout} />
-						<Route path="/users/:id/details" exact component = {isAuth(UserDetails)} />
-						<Route path="/users/:id/images" component = {isAuth(MyImages)} />
+						<Route path="/users/:id/details" exact component={isAuth(UserDetails)} />
+						<Route path="/users/:id/images" component={isAuth(MyImages)} />
 						<Route path="/images/all" component={isAuth(AllImages)} />
 						<Route path="/images/upload" component={isAuth(ImageUpload)} />
-						<Route path="/images/:id/edit" component= {isAuth(EditImage)} />
+						<Route path="/images/:id/edit" component={isAuth(EditImage)} />
 						<Route path="/images/details/:id" component={ImageDetails} />
 					</Switch>
-				</UserContext.Provider>
-			</BrowserRouter>
-		</body>
+				</main>
+			</UserContext.Provider>
+		</BrowserRouter>
+
 	)
 }
 

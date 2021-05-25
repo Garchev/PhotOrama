@@ -38,7 +38,7 @@ function ImageUpload({ history }) {
     return (
 
         <fieldset id="uploadContainer" class="container-sm">
-            <form class="">
+            <form class="upload-form">
                 <div class="form-group">
                     <div role="alert" class="fade alert alert-danger show" id="error">Error</div>
                     <div class="form-file">

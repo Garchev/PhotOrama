@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import './Header.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { UserContext } from '../../UserContext';
+import './Header.css';
+
 function Header() {
     const { user, setUser } = useContext(UserContext);
     useEffect(() => {
@@ -24,8 +25,7 @@ function Header() {
     }, [user, setUser])
 
     return (
-        <header className="header">
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">
 
                     <img
@@ -86,7 +86,7 @@ function Header() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </header>
+        
     )
 }
 

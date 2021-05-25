@@ -2,3 +2,19 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
+main {
+    text-align: center;
+    margin-top: 6em;
+    height: 100%;
+    width: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100vh;
+}
