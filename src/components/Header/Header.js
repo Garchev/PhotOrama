@@ -23,11 +23,9 @@ function Header() {
             }
         }
     }, [user, setUser])
-
     return (
             <Navbar collapseOnSelect bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">
-
                     <img
                         src="../../logo.png"
                         width="30"
@@ -68,7 +66,6 @@ function Header() {
                                 :
                                 <NavDropdown.Item as={Link} to="/users/register">Register</NavDropdown.Item>
                             }
-
 
                             {user != null ?
                                 <NavDropdown.Item as={Link} to="/users/logout">Logout</NavDropdown.Item>
