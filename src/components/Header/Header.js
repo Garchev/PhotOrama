@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import { UserContext } from '../../UserContext';
+import Cookies from 'js-cookie';
 import './Header.css';
 
 function Header() {
@@ -22,7 +22,8 @@ function Header() {
                 })
             }
         }
-    }, [user, setUser])
+    }, [user])
+
     return (
             <Navbar collapseOnSelect bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">

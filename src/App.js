@@ -1,5 +1,5 @@
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import { lazy, useState, useMemo } from 'react';
+import { lazy, Suspense, useState, useMemo } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -8,12 +8,12 @@ import UserDetails from './components/Auth/UserDetails'
 import Logout from './components/Auth/Logout';
 import { UserContext } from './UserContext';
 import isAuth from './hoc/isAuth';
-const Register = lazy(() => import('./components/Auth/Register'));
-const ImageUpload = lazy(() => import('./components/Files/ImageUpload'));
-const MyImages = lazy(() => import('./components/Images/MyImages'));
-const AllImages = lazy(() => import('./components/Images/AllImages'));
-const ImageDetails = lazy(() => import('./components/Images/ImageDetails'));
-const EditImage = lazy(() => import('./components/Images/EditImage'));
+import Register from './components/Auth/Register';
+import ImageUpload from './components/Files/ImageUpload';
+import MyImages from './components/Images/MyImages';
+import AllImages from './components/Images/AllImages';
+import ImageDetails from './components/Images/ImageDetails';
+import EditImage from './components/Images/EditImage';
 
 function App() {
 	const [user, setUser] = useState(null);
