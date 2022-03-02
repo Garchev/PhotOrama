@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCUqtPCx0Z975rEMct90RLo4fON5oGGV2I",
+    apiKey: "",
     authDomain: "photoramaproj.firebaseapp.com",
     projectId: "photoramaproj",
     storageBucket: "photoramaproj.appspot.com",
