@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { updateImage, getOne } from '../../services/images';
-import '../../src/components/Files/Upload.css';
+import '../../../src/components/Files/Upload.css';
 
 
 function EditImage({ match, history }) {
