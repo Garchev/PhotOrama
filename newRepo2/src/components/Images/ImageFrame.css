@@ -1,0 +1,75 @@
+.imageContainer {
+    display: flex;
+    max-width: 50vw;
+    padding: 1em 0em 1em 0px ;
+    border-radius: 15px;
+    position: relative;
+    top: 1.5em;
+    margin-bottom: 1em;
+    background-color: rgba(77, 75, 75, 80%);
+    text-align: center;
+    box-shadow: 4px 4px rgba(0, 0, 0, 60%);
+    flex-direction: column;
+}
+
+.imageContainer:last-of-type {
+    margin-bottom: 3em;
+}
+
+.imageContainer h3, h4 , h5, p{
+    text-shadow: 2px 2px rgba(0, 0, 0, 60%);
+    margin: 0;
+}
+
+.imageContainer .image {
+    align-self: center;
+    width: 90%;
+    object-fit:fill;
+    object-position: center;
+    margin: 1.5em;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 25%)
+}
+
+.link-details {
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    object-position: center;
+    
+}
+
+.link-details:hover{
+    text-decoration: none;
+    color:darkgray
+}
+
+.image-details {
+    color: aliceblue;
+}
+
+#detailsContainer {
+    display: flex;
+    flex: 1 1 100%;
+    align-items: center;
+    flex-direction: column;
+    width: 50vw;
+    max-width: 75vw;
+    color: aliceblue;
+    padding-bottom: 2em;
+}
+
+#descriptionParagraph {
+    padding-block: 1em;
+    font-style: oblique;
+}
+
+#editBtn, #deleteBtn {
+    left:auto;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+#authorName {
+    font-weight: bold;
+    font-style:italic;
+}

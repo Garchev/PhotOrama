@@ -1,0 +1,11 @@
+h1, h2, h3, h4, h5, p {
+    color: floralwhite;
+    margin-top: 10px;
+    text-shadow: 2px 2px 5px black
+}
+
+div.spinner-border {
+    left: auto;
+    right: auto;
+    top: 4em;
+}
